@@ -1,0 +1,12 @@
+.user-title{
+    margin-left: 1me;
+}
+
+mat-card{
+    margin: 10px;
+    width: 300px;
+}
+
+mat-card-content, mat-card-actions{
+    margin: 1em;
+}
