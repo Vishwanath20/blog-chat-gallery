@@ -1,11 +1,24 @@
+// export class Post {
+//     id?: string;
+//     image: any;
+//     authorId: string;
+//     author: string;
+//     title: string;
+//     content:string;
+//     draft: boolean;
+//     trending: number;
+//     published: Date;
+// }
+
 export class Post {
     id?: string;
     image: any;
     authorId: string;
     author: string;
     title: string;
-    content:string;
+    content: string;
     draft: boolean;
-    claps: number;
+    trending: number;
     published: Date;
-}
+  }
+  

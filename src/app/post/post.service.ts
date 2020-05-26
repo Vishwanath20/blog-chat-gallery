@@ -1,44 +1,57 @@
 import { Injectable } from '@angular/core';
-import{ 
+import {
   AngularFirestore,
   AngularFirestoreCollection,
   AngularFirestoreDocument
-} from 'angularfire2/firestore';
+} from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+// add rxjs operator imports
 import { map } from 'rxjs/operators';
 
 import { Post } from './post.model';
-import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class PostService {
-
   postsCollection: AngularFirestoreCollection<Post>;
   postDoc: AngularFirestoreDocument<Post>;
 
-  constructor( private afs: AngularFirestore) { 
-    this.postsCollection = this.afs.collection("post", ref =>
-    ref.orderBy("claps", "desc").limit(10));
+  constructor(private afs: AngularFirestore) {
+    this.postsCollection = this.afs.collection('posts', ref =>
+      ref.orderBy('trending', 'desc').limit(10)
+    );
   }
 
   getPosts(): Observable<Post[]> {
     // use pipe operator before mapping actions
-     return this.postsCollection.snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as Post;
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      }))
-    )
+    return this.postsCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data() as Post;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
   }
 
-  getPostData(id:string){
-    this.postDoc = this.afs.doc<Post>(`post/${id}`);
+  getPost(id: string) {
+    return this.afs.doc<Post>(`posts/${id}`);
+  }
+
+  getPostData(id: string) {
+    this.postDoc = this.afs.doc<Post>(`posts/${id}`);
     return this.postDoc.valueChanges();
   }
 
-  create(data:Post){
-    return this.postsCollection.add(data);
-  }  
+  create(data: Post) {
+    this.postsCollection.add(data);
+  }
+
+  delete(id: string) {
+    return this.getPost(id).delete();
+  }
+
+  update(id: string, formData) {
+    return this.getPost(id).update(formData);
+  }
 }
