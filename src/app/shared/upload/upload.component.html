@@ -1,0 +1,5 @@
+
+<label for="file">
+    <input type="file" (change)="detect($event)"> 
+ </label>
+ <button [disabled]="!selection" (click)="upload()">Upload</button>

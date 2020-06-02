@@ -103,6 +103,7 @@ export class PostListItemComponent implements OnInit {
       task.snapshotChanges().pipe(
         finalize(() => {
           this.downloadURL = ref.getDownloadURL();
+          console.log("Type of DownloadURL is::"+typeof(this.downloadURL));
           this.downloadURL.subscribe(url => (this.imageURL = url));
           console.log('Image Uploaded!');
         })

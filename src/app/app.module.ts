@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDividerModule } from '@angular/material/divider';
 import { AngularFireModule} from 'angularfire2';
-import{ ReactiveFormsModule, FormsModule} from '@angular/forms';
+import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +13,8 @@ import { RoutingModule } from './routing.module';
 import { environment } from 'src/environments/environment';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { PostModule } from './post/post.module';
+import { GalleryModule } from './gallery/gallery.module';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { PostModule } from './post/post.module';
     ReactiveFormsModule,
     FormsModule,
     MatFormFieldModule,
+    GalleryModule,
     PostModule
   ],
   providers: [],
