@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { 
   AngularFirestore,
-  AngularFirestoreCollection
+  AngularFirestoreCollection,
+  AngularFirestoreDocument
 } from 'angularfire2/firestore';
 import { AuthService } from '../core/auth.service';
 import { map } from 'rxjs/operators';
+import { AngularFireStorage } from 'angularfire2/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +14,9 @@ import { map } from 'rxjs/operators';
 export class GalleryService {
 
   galleryCollection: AngularFirestoreCollection<any>;
+  galleryDoc: AngularFirestoreDocument<any>;
 
-  constructor(private afs: AngularFirestore, private auth: AuthService) { }
+  constructor(private afs: AngularFirestore, private auth: AuthService, private storage:AngularFireStorage) { }
 
   getImages(){
     console.log("Gallery service called--getImage()");
@@ -34,5 +37,22 @@ export class GalleryService {
     }
       
     ));
+  }
+
+  getImage(id: string){
+    const uid = this.auth.currentUserId;
+    this.galleryDoc = this.afs.doc(`users/${uid}/gallery/${id}`);
+    return this.galleryDoc.valueChanges();
+
+  }
+
+  deleteImage(id:string, name:string){
+    console.log("Inside the Gallery service--deleteImage::");
+    const uid = this.auth.currentUserId;
+    const imageRef = this.storage.ref(`users/${uid}/gallery`).child(name).delete();
+    console.log("Image deleted from storage!!!");
+    this.afs.doc(`users/${uid}/gallery/${id}`).delete();
+    console.log("Image is deleted from database!!");
+    console.log("All done here!!");
   }
 }

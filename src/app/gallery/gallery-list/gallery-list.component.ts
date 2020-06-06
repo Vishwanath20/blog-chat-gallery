@@ -15,7 +15,7 @@ export class GalleryListComponent implements OnInit {
 
   ngOnInit() {
     this.getImages();
-   
+
   }
 
   getImages(){
@@ -23,6 +23,4 @@ export class GalleryListComponent implements OnInit {
     console.log("Images-gallery is::"+this.images);
     this.images.subscribe(res => console.log(res));
   }
-
-
 }

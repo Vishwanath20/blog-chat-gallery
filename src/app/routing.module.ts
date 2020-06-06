@@ -4,7 +4,8 @@ import { GalleryListComponent } from './gallery/gallery-list/gallery-list.compon
 
 const routes: Routes = [
   //{path: '', redirectTo: '/users', pathMatch: 'full'},
-   {path: '', component: GalleryListComponent},
+   //{path: '', component: GalleryListComponent},
+   {path: '', loadChildren:'./gallery/gallery.module#GalleryModule'},
   {path: '', loadChildren:'./auth/auth.module#AuthModule'}
 ];
 
