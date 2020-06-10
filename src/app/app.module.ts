@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { PostModule } from './post/post.module';
 import { GalleryModule } from './gallery/gallery.module';
+import { ChatModule } from './chat/chat.module';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { GalleryModule } from './gallery/gallery.module';
     FormsModule,
     MatFormFieldModule,
     GalleryModule,
-    PostModule
+    PostModule,
+    ChatModule
   ],
   providers: [],
   bootstrap: [AppComponent]

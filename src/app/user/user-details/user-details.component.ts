@@ -4,6 +4,7 @@ import { ActivatedRoute} from '@angular/router';
 import { UserService } from '../user.service';
 import { User} from '../user.model';
 import { Observable } from 'rxjs';
+import { ThreadService } from 'src/app/chat/thread.service';
 @Component({
   selector: 'app-user-details',
   templateUrl: './user-details.component.html',
@@ -18,7 +19,8 @@ export class UserDetailsComponent implements OnInit {
 
   constructor( 
     private route: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private threadService: ThreadService 
     ) { }
 
     ngOnInit() {
@@ -30,6 +32,13 @@ export class UserDetailsComponent implements OnInit {
   getUser(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.userService.getUser(id).subscribe(user => (this.user = user));
+  }
+
+  chat(){
+    const profileId = this.route.snapshot.paramMap.get('id'); 
+    return this.threadService.createThread(profileId)
+    .then( () => console.log("Thread Created"))
+    .catch( error => console.log(error))
   }
 
 }
