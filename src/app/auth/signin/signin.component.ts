@@ -20,7 +20,7 @@ export class SigninComponent implements OnInit {
   
   constructor(
     public fb: FormBuilder,
-    private auth: AuthService,
+    public auth: AuthService,
     private router: Router
   ) { 
     this.signInForm = this.fb.group( {
@@ -48,9 +48,10 @@ export class SigninComponent implements OnInit {
     return this.auth.emailSignIn(this.email.value, this.password.value)
     .then( user => {
       if(this.signInForm.valid){
-        this.router.navigate(['/'])
+        this.router.navigate(['/']);
+        console.log("Login Successful!!");
+        this.signInForm.reset();
       }
     })
-
   }
 }

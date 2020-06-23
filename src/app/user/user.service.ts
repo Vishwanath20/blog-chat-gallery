@@ -33,7 +33,7 @@ export class UserService {
     return this.userDoc.valueChanges();
   }
 
-  updateProfileData( displayName:string, photoURL: string){
+  updateProfileData( displayName:string, photoURL){
     const user = this.auth.authState;
     const data = {displayName, photoURL};
     return user.updateProfile(data)

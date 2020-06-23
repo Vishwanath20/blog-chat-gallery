@@ -1,9 +1,18 @@
 export class Message {
-    id?:string;
+    id?: string;
     photoURL: string;
     sender: string;
     senderId: string;
     content: string;
     timestamp: Date;
+  }
+
+  // export class Message {
+//     id?:string;
+//     photoURL: string;
+//     sender: string;
+//     senderId: string;
+//     content: string;
+//     timestamp: Date;
     
-}
+// }

@@ -38,6 +38,6 @@ export class PostListComponent implements OnInit {
   ngOnInit() {
     this.posts = this.postService.getPosts();
     console.log("Inside the post-list--- posts is::"+this.posts);
-    this.posts.forEach
+    // this.posts.forEach
   }
 }

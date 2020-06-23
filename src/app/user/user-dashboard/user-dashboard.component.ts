@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Location} from '@angular/common';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
+import { Md5 } from 'ts-md5'
+import { finalize } from 'rxjs/operators';
 
 import { User } from '../user.model';
 import { AuthService } from 'src/app/core/auth.service';
 import { UserService } from '../user.service';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-user-dashboard',
   templateUrl: './user-dashboard.component.html',
@@ -15,12 +18,11 @@ export class UserDashboardComponent implements OnInit {
   editing=false;
   user:User;
 
-  task: AngularFireUploadTask;
+task: AngularFireUploadTask;
 
   path: string;
   meta: object;
   uploadType: boolean;
-
 
   constructor( private auth: AuthService,
     private userService: UserService,
@@ -34,6 +36,8 @@ export class UserDashboardComponent implements OnInit {
   }
 
   setUploadData() {
+
+    const uid = this.auth.currentUserId;
     return this.auth.user.subscribe(user => {
       // wrap this in a if statement
       // to avoid error msg on logout
@@ -49,8 +53,11 @@ export class UserDashboardComponent implements OnInit {
   }
 
   getUser(){
-    return this.auth.user.subscribe(user => this.user = user);
-    console.log("user is:::"+this.user);
+    return this.auth.user.subscribe(user => {
+      this.user = user;
+      console.log("### Inside the user-dashboard--user is:::"+this.user);
+    } );
+   
   }
 
   updateProfile(){
@@ -64,24 +71,32 @@ export class UserDashboardComponent implements OnInit {
     return this.userService.updateEmailData(this.user.email )
   }
 
-  uploadPhotoURL(event):void {
+  async  uploadPhotoURL(event) {
     const file = event.target.files[0];
-    const path = `users/${this.user.uid}/photos/${file.name}`;
-    console.log("file name is::"+file.name)
+
+    const fileName = Md5.hashStr(file.name + new Date().getTime());
+    console.log("### Inside the user-dashboard--fileName::"+fileName);
+
+    const path = `users/${this.user.uid}/photos/${fileName}`;
+    const ref = this.storage.ref(path);
+   // console.log("file name is::"+file.name)
     if (file.type.split('/')[0] !== 'image') {
       return alert('only images allowed');
-    } else {
-      this.task = this.storage.upload(path, file);
+    } 
+    else {
+     this.task = this.storage.upload(path, file);
 
-      // add this ref
-      const ref = this.storage.ref(path);
+     // add this ref
+     const ref = this.storage.ref(path);
+     console.log("Inside the user-dashboard-- ref is::"+ref);
+     console.log("Inside the user-dashboard-- ref.getDownloadURL() is::"+ref.getDownloadURL());
 
-      // and change the observable here
-      ref.getDownloadURL().subscribe(url => {
-        console.log("User profile image url is:: "+url);
-        this.userService.updateProfileData(this.user.displayName, url);
-      });
-    }
+     // and change the observable here
+     ref.getDownloadURL().subscribe(url => {
+       console.log("User profile image url is:: "+url);
+       this.userService.updateProfileData(this.user.displayName, url);
+     });
+   }
   }
 
   updateUser() {

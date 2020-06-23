@@ -6,7 +6,7 @@
 
         <mat-form-field [formGroup]="signInForm">
             <input matInput placeholder="Enter your email" [formControl]="email" required>
-            <mat-error *ngIf="email.Valid"> Not a Valid Email</mat-error>
+            <mat-error *ngIf="email.valid"> Not a Valid Email</mat-error>
         </mat-form-field>
 
         <mat-form-field [formGroup]="signInForm">
@@ -16,7 +16,7 @@
             <mat-hint align="end">
                 <a routerLink="/reset-password"> reset password</a>
             </mat-hint>
-            <mat-error *ngIf="password.Valid"> Not a Valid Password</mat-error>
+            <mat-error *ngIf="password.valid"> Not a Valid Password</mat-error>
         </mat-form-field>
 
         <button mat-raised-button type="submit" color="accent">Sign in</button>

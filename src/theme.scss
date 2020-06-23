@@ -1,0 +1,11 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$Blog-Chat-Gallery-app-primary: mat-palette($mat-deep-purple, 900);
+$Blog-Chat-Gallery-app-accent:  mat-palette($mat-deep-orange, A200);
+
+$Blog-Chat-Gallery-app-warn:    mat-palette($mat-red, 900);
+
+$Blog-Chat-Gallery-app-theme: mat-light-theme($Blog-Chat-Gallery-app-primary, $Blog-Chat-Gallery-app-accent, $Blog-Chat-Gallery-app-warn);
+
+@include angular-material-theme($Blog-Chat-Gallery-app-theme);

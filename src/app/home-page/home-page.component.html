@@ -1,0 +1,39 @@
+<main>
+<div *ngFor="let item of items | async">
+<mat-card>
+  <img [src]="item.image || '//:0'" >
+  <mat-card-content>
+    <mat-card-title>{{item.title}}</mat-card-title>
+    <mat-card-subtitle>  posted by <b> {{ item.author }} </b> {{ item.published | fromNow }} </mat-card-subtitle>
+  </mat-card-content>
+</mat-card>
+</div>
+</main>
+
+
+<!-- <main>
+  <div [hidden]="editing">
+    <mat-card>
+
+      <div routerLink="{{post.id}}">
+        <img src="{{post.image}}" alt="{{post.title}}" [hidden]="post.image == null">
+        <mat-card-content>
+          <mat-card-title>{{post.title}}</mat-card-title>
+          <mat-card-subtitle>posted by {{ post.author }} {{ post.published }} </mat-card-subtitle>
+        </mat-card-content>
+      </div>
+
+      <mat-card-actions align="end">
+        <button mat-icon-button (click)="trending(post.trending)">
+          <span>{{post.trending}}</span>
+          <mat-icon>whatshot</mat-icon>
+        </button>
+        <button mat-icon-button (click)="delete(post.id)" *ngIf="auth.currentUserId === post.authorId">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button (click)="editing=true" *ngIf="auth.currentUserId === post.authorId">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div> -->

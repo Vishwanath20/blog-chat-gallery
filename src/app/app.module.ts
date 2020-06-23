@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDividerModule } from '@angular/material/divider';
 import { AngularFireModule} from 'angularfire2';
 import { ReactiveFormsModule, FormsModule} from '@angular/forms';
+import { ServiceWorkerModule} from '@angular/service-worker';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,11 +16,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { PostModule } from './post/post.module';
 import { GalleryModule } from './gallery/gallery.module';
 import { ChatModule } from './chat/chat.module';
-
+import { SharedModule} from './shared/shared.module'
+import { RoutingGuard } from './routing.guard';
+import { from } from 'rxjs';
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +32,7 @@ import { ChatModule } from './chat/chat.module';
     MaterialModule,
     CoreModule,
     BrowserAnimationsModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
     AngularFireModule.initializeApp(environment.firebase),
     MatDividerModule,
     RoutingModule,
@@ -35,9 +41,10 @@ import { ChatModule } from './chat/chat.module';
     MatFormFieldModule,
     GalleryModule,
     PostModule,
-    ChatModule
+    ChatModule,
+    SharedModule
   ],
-  providers: [],
+  providers: [ RoutingGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

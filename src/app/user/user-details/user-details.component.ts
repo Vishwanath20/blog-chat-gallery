@@ -13,10 +13,7 @@ import { ThreadService } from 'src/app/chat/thread.service';
 export class UserDetailsComponent implements OnInit {
 
   user: User;
- // user: Observable<User>;
-
- val:User;
-
+ 
   constructor( 
     private route: ActivatedRoute,
     private userService: UserService,
@@ -28,7 +25,6 @@ export class UserDetailsComponent implements OnInit {
 
   }
 
-
   getUser(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.userService.getUser(id).subscribe(user => (this.user = user));
@@ -36,6 +32,7 @@ export class UserDetailsComponent implements OnInit {
 
   chat(){
     const profileId = this.route.snapshot.paramMap.get('id'); 
+    console.log("Inside the user-details-- profile id is::"+profileId);
     return this.threadService.createThread(profileId)
     .then( () => console.log("Thread Created"))
     .catch( error => console.log(error))

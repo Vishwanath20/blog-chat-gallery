@@ -6,7 +6,7 @@
         <img src="{{post.image}}" alt="{{post.title}}" [hidden]="post.image == null">
         <mat-card-content>
           <mat-card-title>{{post.title}}</mat-card-title>
-          <mat-card-subtitle>posted by {{ post.author }} {{ post.published.second * 1000 | fromNow }} </mat-card-subtitle>
+          <mat-card-subtitle>posted by {{ post.author }} {{ post.published }} </mat-card-subtitle>
         </mat-card-content>
       </div>
 

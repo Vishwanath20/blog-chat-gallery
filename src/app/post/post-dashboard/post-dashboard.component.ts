@@ -183,6 +183,7 @@ export class PostDashboardComponent implements OnInit {
   }
 
   uploadPostImage(event) {
+
     console.log('## Inside the post-dashboardh-- uploadPostImage called##!');
     var dateTime = new Date();
     const file = event.target.files[0];
@@ -208,6 +209,8 @@ export class PostDashboardComponent implements OnInit {
       });
     }
     
+    // ************** below is old cold *************************
+
     // else {
     //   const task = this.storage.upload(path, file);
     //   console.log('## Inside the post-dashboardh-- task is::##!'+task);
@@ -228,5 +231,6 @@ export class PostDashboardComponent implements OnInit {
     //   );
     // }
   }
+
 }
 
