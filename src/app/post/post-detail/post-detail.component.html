@@ -7,7 +7,7 @@
         <mat-card-title>{{ post.title }} </mat-card-title>
 
         <mat-card-subtitle>
-            Posted by:: {{ post.author}} on {{ post.published}}
+            Posted by:: {{ post.author}} on {{ post.published | date:'yyyy/MM/dd h:mm:ss a' }}
         </mat-card-subtitle>
 
         <p> {{ post.id }} </p>

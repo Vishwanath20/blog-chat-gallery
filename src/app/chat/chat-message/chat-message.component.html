@@ -1,12 +1,15 @@
 <mat-list>
   <mat-list-item [ngClass]="{'inbound': incoming, 'outbound': !incoming}">
-    <img matListAvatar [src]="message.photoURL || '//:0'" alt="{{message.sender}}">
-    <p mat-line>{{message.content}}</p>
+    <img matListAvatar [src]="message.photoURL || '//:0'" >   <!-- alt="{{message.sender}} -->
+    <p mat-line> <b>{{message.content}} </b> </p> <br>
     <p mat-line>
-      <small>{{message.timestamp }}</small>
+    By: <small>{{message.sender}}</small> <small>{{message.timestamp | date:'yyyy/MM/dd h:mm:ss a'}}</small>
     </p>
   </mat-list-item>
 </mat-list>
+
+
+
 
 
 <!-- <mat-list role="list">

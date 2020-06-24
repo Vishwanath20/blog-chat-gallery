@@ -9,6 +9,11 @@
            <button mat-icon-button routerLink="gallery" *ngIf="auth.authenticated">
                <mat-icon> photo </mat-icon>
            </button>
+
+           <button mat-icon-button routerLink="users" *ngIf="auth.authenticated">
+            <mat-icon> people </mat-icon>
+            </button>
+
            <button mat-icon-button routerLink="chat" *ngIf="auth.authenticated">
                 <mat-icon> chat </mat-icon>
             </button>

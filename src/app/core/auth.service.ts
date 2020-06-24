@@ -75,7 +75,11 @@ export class AuthService {
     return this.afAuth.auth
       .createUserWithEmailAndPassword(email, password)
       .then(data => this.updateUserData(data.user))
-      .then(() => console.log("Welcome, your account has been created!"))
+      .then(() => {
+        console.log("Welcome, your account has been created!");
+        alert("Your account has been Created successfully... Please login and Enjoyy!!!. ");
+        this.router.navigate(["signin"]);
+      })
       .then(() => {
         this.afAuth.auth.currentUser
           .sendEmailVerification()

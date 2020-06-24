@@ -9,10 +9,20 @@
 <mat-list>
     <mat-list-item>
       <img matListAvatar [src]="thread.avatar || '//:0'">
-      <p mat-line>{{thread.creator}}</p>
+      <p mat-line>{{thread.creator}}</p> <br>
       <p mat-line>{{thread.lastMessage}}</p>
       <button mat-icon-button (click)="delete(thread.id)">
         <mat-icon>delete</mat-icon>
       </button>
     </mat-list-item>
   </mat-list>
+
+
+  <!-- <mat-card>
+    <div routerLink="{{post.id}}">
+      <img src="{{post.image}}" alt="{{post.title}}" [hidden]="post.image == null">
+      <mat-card-content>
+        <mat-card-title>{{post.title}}</mat-card-title>
+        <mat-card-subtitle>posted by {{ post.author }} {{ post.published }} </mat-card-subtitle>
+      </mat-card-content>
+    </div> -->
